@@ -7,6 +7,11 @@ import re
 import easyocr
 from rake_nltk import Rake
 from PIL import Image
+import nltk
+
+# Download the stopwords resource
+nltk.download('stopwords')
+
 
 def extract_text_from_pdf(uploaded_file):
     try:
