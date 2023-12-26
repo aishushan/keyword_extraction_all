@@ -11,6 +11,7 @@ import nltk
 
 # Download the stopwords resource
 nltk.download('stopwords')
+nltk.download('punkt')
 
 
 def extract_text_from_pdf(uploaded_file):
