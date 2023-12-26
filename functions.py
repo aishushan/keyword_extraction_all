@@ -29,7 +29,7 @@ def extract_text_from_pdf(uploaded_file):
         text = ""
         for page_num in range(doc.page_count):
             page = doc[page_num]
-            text += page.get_text("text.utf8").replace('\uFFFD', 't')
+            text += page.get_text("text.utf8").replace('\uFFFD', '')
 
         # Print debug information
         print("Extracted Text from PDF:", text)
@@ -67,7 +67,7 @@ def extract_text_from_doc(uploaded_file):
     print("Uploaded File Type:", uploaded_file.type)
 
     # Open and extract text
-    doc = Document(io.BytesIO(uploaded_file.read()))
+    doc = Document(uploaded_file)
     text = ""
     for paragraph in doc.paragraphs:
         text += paragraph.text + "\n"
@@ -95,6 +95,3 @@ def extract_text_from_image(uploaded_file):
     print("Extracted Text from Image:", text)
 
     return text
-
-
-    
