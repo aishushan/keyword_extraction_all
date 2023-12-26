@@ -24,7 +24,8 @@ if uploaded_file is not None:
         st.text(pdf_text)
 
         st.header("CLEANED KEYWORDS")
-        st.write(pdf_cleaned_keywords)
+        for score, phrase in pdf_cleaned_keywords:
+            st.write(f"{score}: {phrase}")
 
     elif file_type == "docx":
         # Use the correct function name 'loaded_extract_text_from_doc'
