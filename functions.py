@@ -44,6 +44,10 @@ def extract_text_from_pdf(uploaded_file):
         print("Error in extract_text_from_pdf:", str(e))
         return None
 
+# functions.py
+
+# ... (other imports and code)
+
 def extract_keywords_from_text(text):
     # Print debug information
     print("Text for Keyword Extraction:", text)
@@ -53,9 +57,12 @@ def extract_keywords_from_text(text):
     keywords = r.get_ranked_phrases_with_scores()
 
     # Print debug information
-    print("Extracted Keywords:", keywords)
+    print("Extracted Keywords:")
+    for score, phrase in keywords:
+        print(f"{score}: {phrase}")
 
     return keywords
+
 
 def clean_keywords(keywords):
     cleaned_keywords = [(score, re.sub(r'[^a-zA-Z0-9\s]', '', phrase)) for score, phrase in keywords]
