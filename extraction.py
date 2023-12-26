@@ -1,20 +1,7 @@
 import streamlit as st 
-import nltk 
-import pickle 
-import fitz
-import re 
-import easyocr 
-from rake_nltk import Rake 
-from docx import Document 
-from PIL import Image
+from functions import extract_text_from_pdf,extract_keywords_from_text,clean_keywords,extract_text_from_doc,extract_text_from_image
 
-#loading function in pickle file 
-with open('keyword_extraction.pkl','rb') as file:
-  loaded_extract_text_from_pdf=pickle.load(file)
-  loaded_extract_keywords_from_text=pickle.load(file)
-  loaded_clean_keywords=pickle.load(file)
-  loaded_extract_text_from_doc=pickle.load(file)
-  loaded_extract_text_from_image=pickle.load(file)
+
   
 st.title('**********KEYWORD EXTRACTION APPLICATION***********')
 
