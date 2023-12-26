@@ -14,6 +14,10 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 
+# functions.py
+
+# ... (other imports and code)
+
 def extract_text_from_pdf(uploaded_file):
     try:
         # Save the uploaded file temporarily
@@ -25,11 +29,11 @@ def extract_text_from_pdf(uploaded_file):
         print("Uploaded File Type:", uploaded_file.type)
 
         # Open and extract text
-        doc = fitz.open("temp_pdf.pdf")
         text = ""
-        for page_num in range(doc.page_count):
-            page = doc[page_num]
-            text += page.get_text("text.utf8").replace('\uFFFD', '')
+        with fitz.open("temp_pdf.pdf") as doc:
+            for page_num in range(doc.page_count):
+                page = doc[page_num]
+                text += page.get_text("text")
 
         # Print debug information
         print("Extracted Text from PDF:", text)
@@ -37,7 +41,7 @@ def extract_text_from_pdf(uploaded_file):
         return text
     except Exception as e:
         # Print debug information
-        print("Error:", str(e))
+        print("Error in extract_text_from_pdf:", str(e))
         return None
 
 def extract_keywords_from_text(text):
