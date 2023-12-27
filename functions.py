@@ -8,6 +8,9 @@ import easyocr
 from rake_nltk import Rake
 from PIL import Image
 import nltk
+import io
+from docx import Document
+
 
 # Download the stopwords resource
 nltk.download('stopwords')
@@ -44,34 +47,6 @@ def extract_text_from_pdf(uploaded_file):
         print("Error in extract_text_from_pdf:", str(e))
         return None
 
-
-def extract_keywords_from_text(text):
-    # Print debug information
-    print("Text for Keyword Extraction:", text)
-
-    r = Rake()
-    r.extract_keywords_from_text(text)
-    keywords = r.get_ranked_phrases_with_scores()
-
-    # Print debug information
-    print("Extracted Keywords:")
-    for score, phrase in keywords:
-        print(f"{score}: {phrase}")
-
-    return keywords
-
-
-def clean_keywords(keywords):
-    cleaned_keywords = [(score, re.sub(r'[^a-zA-Z0-9\s]', '', phrase)) for score, phrase in keywords]
-
-    # Print debug information
-    print("Cleaned Keywords:", cleaned_keywords)
-
-    return cleaned_keywords
-
-import io
-from docx import Document
-
 def extract_text_from_doc(uploaded_file):
     try:
         # Print debug information
@@ -96,6 +71,29 @@ def extract_text_from_doc(uploaded_file):
         print("Error in extract_text_from_doc:", str(e))
         return None
 
+def extract_keywords_from_text(text):
+    # Print debug information
+    print("Text for Keyword Extraction:", text)
+
+    r = Rake()
+    r.extract_keywords_from_text(text)
+    keywords = r.get_ranked_phrases_with_scores()
+
+    # Print debug information
+    print("Extracted Keywords:")
+    for score, phrase in keywords:
+        print(f"{score}: {phrase}")
+
+    return keywords
+
+
+def clean_keywords(keywords):
+    cleaned_keywords = [(score, re.sub(r'[^a-zA-Z0-9\s]', '', phrase)) for score, phrase in keywords]
+
+    # Print debug information
+    print("Cleaned Keywords:", cleaned_keywords)
+
+    return cleaned_keywords
 
 
 def extract_text_from_image(uploaded_file):
