@@ -58,9 +58,7 @@ def extract_text_from_doc(uploaded_file):
 
         # Extract text using python-docx
         doc = Document(file_buffer)
-        text = ""
-        for paragraph in doc.paragraphs:
-            text += paragraph.text + "\n"
+        text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
 
         # Print debug information
         print("Extracted Text from DOCX:", text)
@@ -70,7 +68,7 @@ def extract_text_from_doc(uploaded_file):
         # Print debug information
         print("Error in extract_text_from_doc:", str(e))
         return None
-
+        
 def extract_keywords_from_text(text):
     # Print debug information
     print("Text for Keyword Extraction:", text)
