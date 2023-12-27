@@ -80,22 +80,30 @@ def extract_text_from_doc(uploaded_file):
         # Print debug information
         print("Error in extract_text_from_doc:", str(e))
         return None
-        
+
 def extract_keywords_from_text(text):
-    # Print debug information
-    print("Text for Keyword Extraction:", text)
+    try:
+        # Print debug information
+        print("Text for Keyword Extraction:", text)
 
-    r = Rake()
-    r.extract_keywords_from_text(text)
-    keywords = r.get_ranked_phrases_with_scores()
+        # Initialize Rake
+        r = Rake()
 
-    # Print debug information
-    print("Extracted Keywords:")
-    for score, phrase in keywords:
-        print(f"{score}: {phrase}")
+        # Extract keywords
+        r.extract_keywords_from_text(text)
+        keywords = r.get_ranked_phrases_with_scores()
 
-    return keywords
+        # Print debug information
+        print("Extracted Keywords:")
+        for score, phrase in keywords:
+            print(f"{score}: {phrase}")
 
+        return keywords
+
+    except Exception as e:
+        # Print debug information
+        print("Error in extract_keywords_from_text:", str(e))
+        return None
 
 def clean_keywords(keywords):
     cleaned_keywords = [(score, re.sub(r'[^a-zA-Z0-9\s]', '', phrase)) for score, phrase in keywords]
