@@ -37,7 +37,8 @@ if uploaded_file is not None:
         st.text(doc_text)
 
         st.header("CLEANED KEYWORDS")
-        st.write(doc_cleaned_keywords)
+        for score, phrase in doc_cleaned_keywords:
+            st.write(f"{score}: {phrase}")
 
     elif file_type in ["jpeg", "png", "jpg"]:
         # Use the correct function name 'loaded_extract_text_from_image'
