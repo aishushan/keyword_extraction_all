@@ -17,9 +17,21 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 
-# functions.py
+def extract_keywords_with_rake(text):
+    # Print debug information
+    print("Text for Keyword Extraction:", text)
 
-# ... (other imports and code)
+    r = Rake()
+    r.extract_keywords_from_text(text)
+    keywords = r.get_ranked_phrases_with_scores()
+
+    # Print debug information
+    print("Extracted Keywords:")
+    for score, phrase in keywords:
+        print(f"{score}: {phrase}")
+
+    return keywords
+
 
 def extract_text_from_pdf(uploaded_file):
     try:
