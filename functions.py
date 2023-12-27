@@ -44,9 +44,6 @@ def extract_text_from_pdf(uploaded_file):
         print("Error in extract_text_from_pdf:", str(e))
         return None
 
-# functions.py
-
-# ... (other imports and code)
 
 def extract_keywords_from_text(text):
     # Print debug information
@@ -72,21 +69,32 @@ def clean_keywords(keywords):
 
     return cleaned_keywords
 
+import io
+
 def extract_text_from_doc(uploaded_file):
-    # Print debug information
-    print("Uploaded File Name:", uploaded_file.name)
-    print("Uploaded File Type:", uploaded_file.type)
+    try:
+        # Print debug information
+        print("Uploaded File Name:", uploaded_file.name)
+        print("Uploaded File Type:", uploaded_file.type)
 
-    # Open and extract text
-    doc = Document(uploaded_file)
-    text = ""
-    for paragraph in doc.paragraphs:
-        text += paragraph.text + "\n"
+        # Create a BytesIO object from the buffer
+        file_buffer = io.BytesIO(uploaded_file.read())
 
-    # Print debug information
-    print("Extracted Text from DOCX:", text)
+        # Open and extract text
+        doc = Document(file_buffer)
+        text = ""
+        for paragraph in doc.paragraphs:
+            text += paragraph.text + "\n"
 
-    return text
+        # Print debug information
+        print("Extracted Text from DOCX:", text)
+
+        return text
+    except Exception as e:
+        # Print debug information
+        print("Error in extract_text_from_doc:", str(e))
+        return None
+
 
 def extract_text_from_image(uploaded_file):
     # Print debug information
