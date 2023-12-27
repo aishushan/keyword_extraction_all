@@ -70,6 +70,7 @@ def clean_keywords(keywords):
     return cleaned_keywords
 
 import io
+from docx import Document
 
 def extract_text_from_doc(uploaded_file):
     try:
@@ -80,7 +81,7 @@ def extract_text_from_doc(uploaded_file):
         # Create a BytesIO object from the buffer
         file_buffer = io.BytesIO(uploaded_file.read())
 
-        # Open and extract text
+        # Extract text using python-docx
         doc = Document(file_buffer)
         text = ""
         for paragraph in doc.paragraphs:
@@ -94,6 +95,7 @@ def extract_text_from_doc(uploaded_file):
         # Print debug information
         print("Error in extract_text_from_doc:", str(e))
         return None
+
 
 
 def extract_text_from_image(uploaded_file):
